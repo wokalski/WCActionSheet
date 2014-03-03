@@ -5,7 +5,7 @@ WCActionSheet
 
 I created this small alternative to UIActionSheet because I needed further customization and a bit different look.
 
-![WCActionSheet](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png)
+![WCActionSheet](/Action_sheet_mov.gif)
 
 #### How to use it
 
