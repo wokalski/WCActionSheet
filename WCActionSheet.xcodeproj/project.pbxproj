@@ -21,6 +21,9 @@
 		C9D6CF6118BF7AA800796148 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9D6CF4318BF7AA800796148 /* UIKit.framework */; };
 		C9D6CF6918BF7AA800796148 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C9D6CF6718BF7AA800796148 /* InfoPlist.strings */; };
 		C9D6CF6B18BF7AA800796148 /* WCActionSheetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D6CF6A18BF7AA800796148 /* WCActionSheetTests.m */; };
+		C9D6CF7518BF7B5500796148 /* Download-iPhone5-Retina-HD-Wallpapers-43.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C9D6CF7418BF7B5500796148 /* Download-iPhone5-Retina-HD-Wallpapers-43.jpg */; };
+		C9D6CF7818BF7C2B00796148 /* WCActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D6CF7718BF7C2B00796148 /* WCActionSheet.m */; };
+		C9D6CF7E18BF8B5600796148 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D6CF7D18BF8B5600796148 /* UIImage+ImageEffects.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,11 @@
 		C9D6CF6618BF7AA800796148 /* WCActionSheetTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WCActionSheetTests-Info.plist"; sourceTree = "<group>"; };
 		C9D6CF6818BF7AA800796148 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C9D6CF6A18BF7AA800796148 /* WCActionSheetTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WCActionSheetTests.m; sourceTree = "<group>"; };
+		C9D6CF7418BF7B5500796148 /* Download-iPhone5-Retina-HD-Wallpapers-43.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Download-iPhone5-Retina-HD-Wallpapers-43.jpg"; sourceTree = "<group>"; };
+		C9D6CF7618BF7C2B00796148 /* WCActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCActionSheet.h; sourceTree = "<group>"; };
+		C9D6CF7718BF7C2B00796148 /* WCActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCActionSheet.m; sourceTree = "<group>"; };
+		C9D6CF7C18BF8B5600796148 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		C9D6CF7D18BF8B5600796148 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +125,10 @@
 				C9D6CF5118BF7AA800796148 /* Main.storyboard */,
 				C9D6CF5418BF7AA800796148 /* WCViewController.h */,
 				C9D6CF5518BF7AA800796148 /* WCViewController.m */,
+				C9D6CF7618BF7C2B00796148 /* WCActionSheet.h */,
+				C9D6CF7718BF7C2B00796148 /* WCActionSheet.m */,
+				C9D6CF7C18BF8B5600796148 /* UIImage+ImageEffects.h */,
+				C9D6CF7D18BF8B5600796148 /* UIImage+ImageEffects.m */,
 				C9D6CF5718BF7AA800796148 /* Images.xcassets */,
 				C9D6CF4618BF7AA800796148 /* Supporting Files */,
 			);
@@ -126,6 +138,7 @@
 		C9D6CF4618BF7AA800796148 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C9D6CF7418BF7B5500796148 /* Download-iPhone5-Retina-HD-Wallpapers-43.jpg */,
 				C9D6CF4718BF7AA800796148 /* WCActionSheet-Info.plist */,
 				C9D6CF4818BF7AA800796148 /* InfoPlist.strings */,
 				C9D6CF4B18BF7AA800796148 /* main.m */,
@@ -230,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9D6CF5818BF7AA800796148 /* Images.xcassets in Resources */,
+				C9D6CF7518BF7B5500796148 /* Download-iPhone5-Retina-HD-Wallpapers-43.jpg in Resources */,
 				C9D6CF4A18BF7AA800796148 /* InfoPlist.strings in Resources */,
 				C9D6CF5318BF7AA800796148 /* Main.storyboard in Resources */,
 			);
@@ -251,8 +265,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9D6CF5618BF7AA800796148 /* WCViewController.m in Sources */,
+				C9D6CF7E18BF8B5600796148 /* UIImage+ImageEffects.m in Sources */,
 				C9D6CF5018BF7AA800796148 /* WCAppDelegate.m in Sources */,
 				C9D6CF4C18BF7AA800796148 /* main.m in Sources */,
+				C9D6CF7818BF7C2B00796148 /* WCActionSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +477,7 @@
 				C9D6CF7018BF7AA800796148 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C9D6CF7118BF7AA800796148 /* Build configuration list for PBXNativeTarget "WCActionSheetTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +486,7 @@
 				C9D6CF7318BF7AA800796148 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

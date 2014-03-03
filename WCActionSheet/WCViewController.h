@@ -10,4 +10,6 @@
 
 @interface WCViewController : UIViewController
 
+- (IBAction)presentActionSheet:(id)sender;
+
 @end
