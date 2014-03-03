@@ -11,7 +11,7 @@ I created this small alternative to UIActionSheet because I needed further custo
 
 I made the API as similar to UIActionSheet as possible.
 
-In order to initialize the WCActionSheet you can use one of following methods:
+#####In order to initialize the WCActionSheet you can use one of following methods:
 
 ```objc
 
@@ -29,7 +29,7 @@ WCActionSheet *actionSheet = [[WCActionSheet alloc] initWithFrame:initWithDelega
 
 ```
 
-Adding buttons
+#####Adding buttons
 
 ```objc
 
@@ -46,13 +46,36 @@ Adding buttons
 
 ```
 
-Show a WCActionSheet
+#####Show a WCActionSheet
 
 ```objc
 
 // Showing WCActionSheet is as simple as:
 
 [actionSheet show];
+
+```
+
+#####Delegate protocol
+
+```objc
+@protocol WCActionSheetDelegate <NSObject>
+@optional
+
+// Called when a button is clicked. The view will be automatically dismissed after this call returns
+- (void)actionSheet:(WCActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
+
+// Called when we cancel a view (eg. the user clicks the Home button). This is not called when the user clicks the cancel button.
+// If not defined in the delegate, we simulate a click in the cancel button
+- (void)actionSheetCancel:(WCActionSheet *)actionSheet;
+
+- (void)willPresentActionSheet:(WCActionSheet *)actionSheet;  // before animation and showing view
+- (void)didPresentActionSheet:(WCActionSheet *)actionSheet;  // after animation
+
+- (void)actionSheet:(WCActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex; // before animation and hiding view
+- (void)actionSheet:(WCActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex;  // after animation
+
+@end
 
 ```
 
