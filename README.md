@@ -46,7 +46,7 @@ Adding buttons
 
 ```
 
-Show an WCActionSheet
+Show a WCActionSheet
 
 ```objc
 
@@ -62,4 +62,5 @@ WCActionSheet is licensed under MIT license.
 
 ####Author
 
-You can find me on twitter @wczekalski or mail me if you are feeling friendly
+You can find me on [twitter @wczekalski](https://twitter.com/wczekalski) or [mail me](mailto:me@wczekalski.com) if you are feeling friendly
+
