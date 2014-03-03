@@ -76,7 +76,6 @@ WCActionSheet *actionSheet = [[WCActionSheet alloc] initWithFrame:initWithDelega
 - (void)actionSheet:(WCActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex;  // after animation
 
 @end
-
 ```
 
 ####License
