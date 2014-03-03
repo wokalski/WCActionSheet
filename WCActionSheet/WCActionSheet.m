@@ -251,7 +251,6 @@ static UIWindow *__sheetWindow = nil;
     window.windowLevel = UIWindowLevelNormal;
     window.alpha = 1.f;
     [self layoutIfNeeded];
-    [self loadBlurViewContents];
     [window addSubview:self.blurView];
     
     for (UIView *separator in self.separators) {
@@ -259,7 +258,8 @@ static UIWindow *__sheetWindow = nil;
     }
     
     [window addSubview:self];
-    
+    [self loadBlurViewContents];
+	
     window.hidden = NO;
     
     self.frame = CGRectOffset(self.frame, 0.f, self.frame.size.height+kMargin);
