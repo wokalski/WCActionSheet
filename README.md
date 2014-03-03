@@ -9,6 +9,13 @@ I created this small alternative to UIActionSheet because I needed further custo
 
 #### How to use it
 
+```ruby
+#Cocoapods
+pod 'WCActionSheet'
+
+#Of course you can also download the source and copy the WCActionSheet.* and UIImage+ImageEffect.* files.
+```
+
 I made the API as similar to UIActionSheet as possible.
 
 #####In order to initialize the WCActionSheet you can use one of following methods:
@@ -76,6 +83,26 @@ WCActionSheet *actionSheet = [[WCActionSheet alloc] initWithFrame:initWithDelega
 - (void)actionSheet:(WCActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex;  // after animation
 
 @end
+```
+
+#####Customizing appearance
+
+```objc
+// You may use UIAppearance proxy in order to set following properties. (You can also set the properties directly)
+
+@property(nonatomic) CGFloat blurRadius UI_APPEARANCE_SELECTOR;
+
+@property(nonatomic, strong) UIColor *blurTintColor UI_APPEARANCE_SELECTOR;
+@property(nonatomic, strong) UIColor *separatorColor UI_APPEARANCE_SELECTOR;
+
+@property(nonatomic, strong) UIColor *highlightedButtonColor UI_APPEARANCE_SELECTOR;
+
+- (NSDictionary *)buttonTextAttributesForState:(UIControlState)state UI_APPEARANCE_SELECTOR;
+- (void)setButtonTextAttributes:(NSDictionary *)attributes forState:(UIControlState)state UI_APPEARANCE_SELECTOR;
+- (NSDictionary *)cancelButtonTextAttributesForState:(UIControlState)state UI_APPEARANCE_SELECTOR;
+- (void)setCancelButtonTextAttributes:(NSDictionary *)attributes forState:(UIControlState)state UI_APPEARANCE_SELECTOR;
+- (NSDictionary *)destructiveButtonTextAttributesForState:(UIControlState)state UI_APPEARANCE_SELECTOR;
+- (void)setDestructiveButtonTextAttributes:(NSDictionary *)attributes forState:(UIControlState)state UI_APPEARANCE_SELECTOR;
 ```
 
 ####License
