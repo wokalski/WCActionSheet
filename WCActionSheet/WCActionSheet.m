@@ -4,6 +4,7 @@
 //
 //  Created by Wojciech Czekalski on 27.02.2014.
 //  Copyright (c) 2014 Wojciech Czekalski. All rights reserved.
+//  Extended by Muhammad Bassio.
 //
 
 #import "WCActionSheet.h"
@@ -22,6 +23,8 @@
 @interface WCActionSheet ()
 @property (nonatomic, readonly) CGSize screenSize;
 
+@property (nonatomic, strong) UIScrollView *buttonsContainer;
+
 @property (nonatomic, strong, readonly) NSMutableArray *buttonTitles;
 
 @property (nonatomic, strong, readonly) NSMutableArray *buttons;
@@ -31,7 +34,7 @@
 @property (nonatomic, strong) UIButton *destructiveButton;
 @property (nonatomic, strong) UIButton *cancelButton;
 
-@property (nonatomic, strong) UIImageView *blurView;
+@property (nonatomic, strong) UIButton *blurView;
 
 @property (nonatomic, strong, readonly) NSArray *separators;
 
@@ -119,8 +122,20 @@ static UIWindow *__sheetWindow = nil;
 }
 
 - (void)__commonInit {
+    
+    _buttonsContainer = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    [self addSubview:_buttonsContainer];
+    
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    _titleLabel.text = @"";
+    _titleLabel.textAlignment = NSTextAlignmentCenter;
+    _titleLabel.textColor = [UIColor lightGrayColor];
+    _titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
+    
+    [self addSubview:_titleLabel];
+    
     _blurRadius = 4.f;
-    _blurView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.screenSize.width, self.screenSize.height)];
+    _blurView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.screenSize.width, self.screenSize.height)];
     
     _blurView.alpha = 0.f;
     
@@ -130,6 +145,8 @@ static UIWindow *__sheetWindow = nil;
     
     self.layer.cornerRadius = 8.f;
     self.clipsToBounds = YES;
+    
+    [_blurView addTarget:self action:@selector(dismissWithClickedButton:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark -
@@ -146,7 +163,7 @@ static UIWindow *__sheetWindow = nil;
     [newButton addTarget:self action:@selector(dismissWithClickedButton:) forControlEvents:UIControlEventTouchUpInside];
     NSUInteger index = [self.buttons count];
     
-    [self addSubview:newButton];
+    [_buttonsContainer addSubview:newButton];
     [self.buttons addObject:newButton];
     [self.buttonTitles addObject:title];
     
@@ -179,7 +196,7 @@ static UIWindow *__sheetWindow = nil;
         [newDestructiveButton addTarget:self action:@selector(dismissWithClickedButton:) forControlEvents:UIControlEventTouchUpInside];
         self.destructiveButton = newDestructiveButton;
         
-        [self addSubview:newDestructiveButton];
+        [_buttonsContainer addSubview:newDestructiveButton];
         [self.buttons insertObject:newDestructiveButton atIndex:0];
         [self.buttonTitles insertObject:title atIndex:0];
     }
@@ -197,7 +214,7 @@ static UIWindow *__sheetWindow = nil;
         [newCancelButton setTitle:title forState:UIControlStateNormal];
         [newCancelButton addTarget:self action:@selector(dismissWithCancelButton:) forControlEvents:UIControlEventTouchUpInside];
         self.cancelButton = newCancelButton;
-
+        
         [self addSubview:newCancelButton];
     }
 }
@@ -212,13 +229,19 @@ static UIWindow *__sheetWindow = nil;
     
     CGFloat contentWidth = screenSize.width - (2*kMargin);
     
-    CGFloat sheetHeight = ([self.buttons count] * kButtonHeight) + kCancelButtonHeight;
+    CGFloat sheetHeight = ([self.buttons count] * kButtonHeight) + kCancelButtonHeight + kButtonHeight;
     
     CGFloat contentOffset = screenSize.height - sheetHeight  - kBottomMargin;
     
-    self.frame = CGRectMake(kMargin, contentOffset, contentWidth, sheetHeight);
+    if (sheetHeight < self.screenSize.height) {
+        self.frame = CGRectMake(kMargin, contentOffset, contentWidth, sheetHeight);
+    }
+    else {
+        self.frame = CGRectMake(kMargin, 20 + kMargin, contentWidth, self.screenSize.height - (2 * kMargin) - 20);
+    }
     
     contentOffset = 0.f;
+    _titleLabel.frame = CGRectMake(0, contentOffset, contentWidth, kButtonHeight);
     
     for (UIButton *button in self.buttons) {
         button.frame = CGRectMake(0.f, contentOffset, contentWidth, kButtonHeight);
@@ -226,9 +249,13 @@ static UIWindow *__sheetWindow = nil;
     }
     
     if (self.cancelButton) {
-        self.cancelButton.frame = CGRectMake(0.f, contentOffset, contentWidth, kCancelButtonHeight);
+        self.cancelButton.frame = CGRectMake(0.f, self.frame.size.height - kCancelButtonHeight, contentWidth, kCancelButtonHeight);
         contentOffset += kCancelButtonHeight;
     }
+    
+    _buttonsContainer.frame = CGRectMake(0, kButtonHeight, self.frame.size.width, self.frame.size.height - kButtonHeight - kCancelButtonHeight);
+    _buttonsContainer.contentSize = CGSizeMake(_buttonsContainer.frame.size.width, sheetHeight - kCancelButtonHeight - kButtonHeight);
+    
 }
 
 - (void)loadBlurViewContents {
@@ -240,7 +267,7 @@ static UIWindow *__sheetWindow = nil;
     
     UIImage *blurredImage = [newImage applyBlurWithRadius:self.blurRadius tintColor:self.blurTintColor saturationDeltaFactor:1.f maskImage:nil];
     
-    self.blurView.image = blurredImage;
+    self.blurView.backgroundColor = [UIColor colorWithPatternImage:blurredImage];
 }
 
 #pragma mark - Show
@@ -254,7 +281,7 @@ static UIWindow *__sheetWindow = nil;
     [window addSubview:self.blurView];
     
     for (UIView *separator in self.separators) {
-        [self addSubview:separator];
+        [_buttonsContainer addSubview:separator];
     }
     
     [window addSubview:self];
@@ -263,11 +290,11 @@ static UIWindow *__sheetWindow = nil;
     window.hidden = NO;
     
     self.frame = CGRectOffset(self.frame, 0.f, self.frame.size.height+kMargin);
-
+    
     if ([self.delegate respondsToSelector:@selector(willPresentActionSheet:)]) {
         [self.delegate willPresentActionSheet:self];
     }
-
+    
     [UIView animateWithDuration:kAnimationDuration delay:0.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.blurView.alpha = 1.f;
         self.frame = CGRectOffset(self.frame, 0.f, -(self.frame.size.height+kMargin));
@@ -440,7 +467,7 @@ static UIWindow *__sheetWindow = nil;
 }
 
 - (NSArray *)separators {
-    NSInteger buttonCount = self.buttons.count;
+    NSInteger buttonCount = self.buttons.count + 1;
     NSMutableArray *mutableSeparators = [NSMutableArray arrayWithCapacity:buttonCount];
     
     CGFloat contentOffset = kButtonHeight - kSeparatorWidth;

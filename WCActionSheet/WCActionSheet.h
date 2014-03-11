@@ -4,6 +4,7 @@
 //
 //  Created by Wojciech Czekalski on 27.02.2014.
 //  Copyright (c) 2014 Wojciech Czekalski. All rights reserved.
+//  Extended by Muhammad Bassio.
 //
 
 #import <UIKit/UIKit.h>
@@ -22,6 +23,7 @@
 - (NSString *)buttonTitleAtIndex:(NSInteger)buttonIndex;
 
 @property(nonatomic,readonly) NSInteger numberOfButtons;
+@property (nonatomic, strong) UILabel *titleLabel;
 
 @property(nonatomic,readonly,getter=isVisible) BOOL visible;
 @property(nonatomic) CGFloat blurRadius UI_APPEARANCE_SELECTOR;
