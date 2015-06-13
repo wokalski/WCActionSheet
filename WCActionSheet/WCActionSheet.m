@@ -260,7 +260,7 @@ static UIWindow *__sheetWindow = nil;
     [window addSubview:self];
     [self loadBlurViewContents];
 	
-    window.hidden = NO;
+    [window makeKeyAndVisible];
     
     self.frame = CGRectOffset(self.frame, 0.f, self.frame.size.height+kMargin);
 
