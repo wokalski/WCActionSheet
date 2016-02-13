@@ -10,7 +10,7 @@ I created this small alternative to UIActionSheet because I needed further custo
 #### How to use it
 
 ```ruby
-#Cocoapods
+#CocoaPods
 pod 'WCActionSheet'
 
 #Of course you can also download the source and copy the WCActionSheet.* and UIImage+ImageEffect.* files.
