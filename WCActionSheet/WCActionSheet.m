@@ -148,7 +148,6 @@ static UIWindow *__sheetWindow = nil;
     
     [self addSubview:newButton];
     [self.buttons addObject:newButton];
-    [self.buttonTitles addObject:title];
     
     return index;
     
